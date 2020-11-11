@@ -1,13 +1,12 @@
 import axios from "axios";
 
-// The getBooks method retrieves recipes from the server
-// It accepts a "query" or term to search the book api for
+// The getBooks method retrieves books from the server
+// It accepts a "query" or term to search the recipe api for
 export default {
   getBooks: function(query) {
     return axios.get("/api/books", { params: { q: query } });
   }
 };
-
 
 // AIzaSyBXh-q5PwWPI2nNsQEaJr4Zloljeza2VGc
 

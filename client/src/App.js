@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Jumbotron from "./components/Jumbotron";
 import Nav from "./components/Nav";
 import Input from "./components/Input";
@@ -10,6 +11,7 @@ import axios from "axios";
 // import { BookList, BookListItem } from "./components/BookList";
 import BookList from "./components/BookList";
 import { Container, Row, Col } from "./components/Grid";
+import Books from "./pages/MyBooks";
 
 function App() {
   const [book, setBook] = useState("");
@@ -52,16 +54,18 @@ function App() {
     console.log("DESCRIPTION", description);
     console.log("IMAGE", image);
     console.log("LINK", link);
-    //console.log("data by book", book.volumeInfo.title);
   }
 
   return (
-    <div>
+    <>
+    <Router>
+    <div id="firstdiv">
       <Nav />
       <Jumbotron />
       <Container>
         <Row>
           <Col size="md-12">
+            <div id="form">
             <form onSubmit={handleFormSubmit}>
               <Container>
                 <Row>
@@ -85,6 +89,7 @@ function App() {
                 </Row>
               </Container>
             </form>
+            </div>
           </Col>
         </Row>
         <Row>
@@ -93,7 +98,7 @@ function App() {
               <BookList>
                 {result.map(book => {
                   return (
-                    <li className="list-group-item">
+                    <li key={book.volumeInfo.title} className="list-group-item">
                       <Container>
                         <Row>
                           <Col size="xs-4 sm-2">
@@ -123,7 +128,7 @@ function App() {
                             <a rel="noreferrer noopener" target="_blank" href={book.volumeInfo.infoLink}>
                               Go to book!
                             </a>
-                            <button onClick={saveToMongo}>Save</button>
+                            <DataButton onClick={saveToMongo}>Save</DataButton>
                           </Col>
                         </Row>
                       </Container>
@@ -144,7 +149,11 @@ function App() {
           </Col>
         </Row>
       </Container>
+
+      <Route exact path="/mybooks" component={Books}/>
     </div>
+    </Router>
+    </>
   );
 }
 
