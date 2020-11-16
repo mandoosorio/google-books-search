@@ -12,6 +12,10 @@ import axios from "axios";
 import BookList from "./components/BookList";
 import { Container, Row, Col } from "./components/Grid";
 import Books from "./pages/MyBooks";
+//import { proxy } from "../package.json";
+
+
+//module.exports = router;
 
 function App() {
   const [book, setBook] = useState("");
@@ -45,15 +49,45 @@ function App() {
     var description = event.target.parentElement.querySelector("p").innerHTML;
     var image = event.target.parentElement.parentElement.querySelector("img").src;
     var link = event.target.parentElement.querySelector("a").href;
-    // console.log("being clicked", event.target.parentElement.querySelector("h3").innerHTML);
-    // console.log("being clicked", event.target.parentElement.querySelector("h4").innerHTML);
-    // console.log("being clicked", event.target.parentElement.querySelector("p").innerHTML);
-    // console.log("being clicked", event.target.parentElement.parentElement.querySelector("img").src);
+    
     console.log("TITLE", title);
     console.log("AUTHORS", authors);
     console.log("DESCRIPTION", description);
     console.log("IMAGE", image);
     console.log("LINK", link);
+
+    let book = {
+      title: title,
+      authors: authors,
+      description: description,
+      image: image,
+      link: link
+    };
+
+    console.log("Book object", book);
+
+    //axios.post("/books", { book });
+
+    axios.post("/books", { book })
+    .then(response => {    
+      return response.json();
+    })
+    .then(data => {
+      if (data.errors) {
+       
+      }
+      else {
+        // clear form
+       
+      }
+    })
+    .catch(err => {
+      // fetch failed, so save in indexed db
+    
+  
+      // clear form
+      
+    });
   }
 
   return (
