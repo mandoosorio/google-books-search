@@ -16,7 +16,7 @@ import Books from "./pages/MyBooks";
 function App() {
   const [book, setBook] = useState("");
   const [result, setResult] = useState([]);
-  const [apiKey, setApiKey] = useState("AIzaSyBXh-q5PwWPI2nNsQEaJr4Zloljeza2VGc"); // Add API Key Here !!
+  const [apiKey] = useState("AIzaSyBXh-q5PwWPI2nNsQEaJr4Zloljeza2VGc"); // Add API Key Here !!
 
   const handleInputChange = event => {
     // Destructure the name and value properties off of event.target
